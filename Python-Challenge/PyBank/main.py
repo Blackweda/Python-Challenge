@@ -1,26 +1,29 @@
 import csv
+import os
 
-filepath = "Resources/budget_data.csv"
+#filepath = "Resources/budget_data.csv"
+filepath = os.path.join("Resources", "budget_data.csv")
+
+months_count = 0
+
+profit_loss_total_amount = 0
+
+profit_loss_changes = []
+profit_loss_changes_average = 0
+    
+# Tracking the greatest profit
+greatest_profit_amount = 0
+greatest_profit_date = ""
+
+# Tracking the greatest loss
+greatest_loss_amount = 0
+greatest_loss_date = ""
+
 
 with open(filepath, encoding='utf') as csvfile:
 
     csvreader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvreader)
-
-    months_count = 0
-
-    profit_loss_total_amount = 0
-
-    profit_loss_changes = []
-    profit_loss_changes_average = 0
-    
-    # Tracking the greatest profit
-    greatest_profit_amount = 0
-    greatest_profit_date = ""
-
-    # Tracking the greatest loss
-    greatest_loss_amount = 0
-    greatest_loss_date = ""
 
     for row in csvreader:
 
@@ -54,22 +57,35 @@ with open(filepath, encoding='utf') as csvfile:
     profit_loss_changes_average / len(profit_loss_changes)
     
     print("Financial Analysis\n")
-    print("------------------\n")
-
-    
+    print("------------------\n")    
     print(f"Total Months: {months_count}\n")
     print(f"Total: ${profit_loss_total_amount}\n")   
-    print(f"Average Change: (${profit_loss_changes_average})") 
+    print(f"Average Change: ${profit_loss_changes_average}\n") 
     print(f"Greatest Increase in Profits: {greatest_profit_date} (${greatest_profit_amount})\n")
     print(f"Greatest Decrease in Profits: {greatest_loss_date} (${greatest_loss_amount})")
+
+    # Write information to an Analysis folder
+    analysis_file = os.path.join("Analysis", "budget_data_analysis.txt")
     
+    with open(analysis_file, "w") as datafile:
 
+        mc = repr(months_count)
+        plta = repr(profit_loss_total_amount)
+        plca = repr(profit_loss_changes_average)
+        gpd = repr(greatest_profit_date)
+        gpa = repr(greatest_profit_amount)
+        gld = repr(greatest_loss_date)
+        gla = repr(greatest_loss_amount)
+        
+        analysis = "\
+Financial Analysis\n\
+------------------\n\
+Total Months: " + mc + "\n\
+Total: $" + plta + "\n\
+Average Change: $" + plca + "\n\
+Greatest Increase in Profits: " + gpd + " $(" + gpa + ")\n\
+Greatest Decrease in Profits: " + gld + " $(" + gla + ")"
 
+        datafile.write(analysis)
 
-    
-
-
-
-
-
-
+        datafile.close
