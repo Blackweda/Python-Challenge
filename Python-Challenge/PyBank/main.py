@@ -74,9 +74,7 @@ with open(filepath, encoding='utf') as csvfile:
         mc = repr(months_count)
         plta = repr(profit_loss_total_amount)
         plca = repr(profit_loss_changes_average)
-        gpd = repr(greatest_profit_date)
         gpa = repr(greatest_profit_amount)
-        gld = repr(greatest_loss_date)
         gla = repr(greatest_loss_amount)
         
         analysis = "\
@@ -85,8 +83,8 @@ Financial Analysis\n\
 Total Months: " + mc + "\n\
 Total: $" + plta + "\n\
 Average Change: $" + plca + "\n\
-Greatest Increase in Profits: " + gpd + " $(" + gpa + ")\n\
-Greatest Decrease in Profits: " + gld + " $(" + gla + ")"
+Greatest Increase in Profits: " + greatest_profit_date + " $(" + gpa + ")\n\
+Greatest Decrease in Profits: " + greatest_loss_date + " $(" + gla + ")"
 
         datafile.write(analysis)
 
