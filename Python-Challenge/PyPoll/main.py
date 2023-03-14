@@ -67,7 +67,7 @@ with open(filepath, encoding='utf') as csvfile:
         c3va = repr(round((candidates_vote_count[2]/total_ballots)*100, 3))
         c3v = repr(candidates_vote_count[2])
 
-        winner = repr(candidates[candidates_vote_count.index(max(candidates_vote_count))])
+        winner = candidates[candidates_vote_count.index(max(candidates_vote_count))]
 
         
         
