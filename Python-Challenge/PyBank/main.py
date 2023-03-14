@@ -23,7 +23,7 @@ greatest_loss_date = ""
 with open(filepath, encoding='utf') as csvfile:
 
     csvreader = csv.reader(csvfile, delimiter=",")
-    csv_header = next(csvreader)
+    csv_header = next(csvreader)    # Date, Profit/Losses
 
     for row in csvreader:
 
@@ -36,8 +36,10 @@ with open(filepath, encoding='utf') as csvfile:
         # Track the changes in profit/loss and average the results
         if months_count == 1:
             profit_loss_changes.append(int(row[1]))
+            print("first entry: " + row[1] + " and size of plc: " + str(len(profit_loss_changes)))
         else:    
             profit_loss_changes.append(int(row[1]) - profit_loss_changes[len(profit_loss_changes)-1])
+            print("row1: " + row[1] + " minus: " + str((profit_loss_changes[len(profit_loss_changes)-1])) + " equals: " + str(int(row[1]) - profit_loss_changes[len(profit_loss_changes)-1]))
       
         # Determine if this row is the greatest profit (so far)
         if int(row[1]) > greatest_profit_amount:
